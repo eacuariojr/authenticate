@@ -6,3 +6,6 @@ CREATE TABLE account(
   password VARCHAR(64) NOT NULL,
   email VARCHAR(255)
 );
+
+INSERT INTO account(username, password, email)
+VALUES ("tomnook", "leaftime", "thetomnook@spamcode.com");

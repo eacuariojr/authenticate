@@ -17,32 +17,46 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter
 {
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private DbUserDetailsService dbUserDetailsService;
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
+    //Authentication (check user identity)
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception
     {
-        auth.userDetailsService(myUserDetailsService);
+        auth.userDetailsService(dbUserDetailsService);
     }
 
+    //Authorization (check user access)
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
         //TODO: understand whatever this mumbo jumbo means
-        http.csrf().disable()
-                .authorizeRequests().antMatchers("/authenticate").permitAll().
-                anyRequest().authenticated()
-                .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.csrf().disable()
+//                .authorizeRequests().antMatchers("/authenticate").permitAll().
+//                anyRequest().authenticated()
+//                .and().sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.authorizeRequests()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .permitAll();
+
+        http.authorizeRequests()
+                .antMatchers("/profile").hasRole("USER")
+                .antMatchers("/**", "/static/assets").permitAll()
+                .and().formLogin();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
     public PasswordEncoder passwordEncoder()
     {
+        //replace with BCryptPasswordEncoder after testing
         return NoOpPasswordEncoder.getInstance();
     }
 

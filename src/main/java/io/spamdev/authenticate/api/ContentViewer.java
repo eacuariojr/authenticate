@@ -2,6 +2,7 @@ package io.spamdev.authenticate.api;
 
 import io.spamdev.authenticate.security.AuthenticationRequest;
 import io.spamdev.authenticate.security.AuthenticationResponse;
+import io.spamdev.authenticate.security.DbUserDetailsService;
 import io.spamdev.authenticate.security.MyUserDetailsService;
 import io.spamdev.authenticate.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ContentViewer
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private MyUserDetailsService userDetailsService;
+    private DbUserDetailsService dbUserDetailsService;
 
     @Autowired
     private JwtUtil jwtTokenUtil;
@@ -50,7 +51,7 @@ public class ContentViewer
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userDetailsService
+        final UserDetails userDetails = dbUserDetailsService
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
