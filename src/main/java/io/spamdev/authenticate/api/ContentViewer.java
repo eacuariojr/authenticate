@@ -3,7 +3,6 @@ package io.spamdev.authenticate.api;
 import io.spamdev.authenticate.security.AuthenticationRequest;
 import io.spamdev.authenticate.security.AuthenticationResponse;
 import io.spamdev.authenticate.security.DbUserDetailsService;
-import io.spamdev.authenticate.security.MyUserDetailsService;
 import io.spamdev.authenticate.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
