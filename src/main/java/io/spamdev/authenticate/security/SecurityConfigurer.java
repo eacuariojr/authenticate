@@ -48,8 +48,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter
 
         http.authorizeRequests()
                 .antMatchers("/profile").hasRole("USER")
-                .antMatchers("/**", "/static/assets").permitAll()
-                .and().formLogin();
+                .antMatchers("/**", "/static/**").permitAll()
+                .and().formLogin()
+                .loginPage("/login").permitAll();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

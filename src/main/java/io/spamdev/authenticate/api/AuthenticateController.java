@@ -13,7 +13,7 @@ public class AuthenticateController
     @GetMapping("/login")
     public String serveLogin()
     {
-        return "login";
+        return "/security/login";
     }
 
     @PostMapping("/login")
