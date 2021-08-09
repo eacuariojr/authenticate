@@ -30,4 +30,11 @@ public class DbUserDetailsService implements UserDetailsService
         //Tutorial's recommended solution
         //return account.map(AccountToUserDetails::new).get();
     }
+
+    public Account saveAccount(Account newAccount) throws IllegalArgumentException
+    {
+        Account account = accountRepository.save(newAccount);
+
+        return account;
+    }
 }

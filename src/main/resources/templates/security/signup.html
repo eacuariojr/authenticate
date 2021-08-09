@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}">
+</head>
+<body>
+<form name="f" th:action="@{/signup}" th:object="${newAccount}" method="post">
+    <fieldset>
+        <legend>Please Sign up</legend>
+        <div th:if="${param.error}" class="alert alert-error">
+            Invalid username and password.
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+            You have been logged out.
+        </div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Username"/> <br>
+        <label for="password">E-mail</label>
+        <input type="text" id="email" name="email" placeHolder="E-Mail"/> <br>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeHolder="Password"/> <br>
+        <div class="form-actions">
+            <button type="submit" class="btn" >Sign Up</button>
+        </div>
+    </fieldset>
+</form>
+</body>
+
+<script th:src="@{/assets/js/signup.js}"></script>
+
+</html>
